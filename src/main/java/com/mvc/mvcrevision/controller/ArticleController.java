@@ -3,13 +3,13 @@ package com.mvc.mvcrevision.controller;
 import com.mvc.mvcrevision.domain.dto.ArticleDto;
 import com.mvc.mvcrevision.domain.entity.Article;
 import com.mvc.mvcrevision.repository.ArticleRepository;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/articles")
@@ -33,5 +33,14 @@ public class ArticleController {
         Article savedArticle = articleRepository.save(articleDto.toEntity());
         log.info("GeneratedValue:{}", savedArticle.getId());
         return "";
+    }
+
+    @GetMapping("/{id}")
+    public String selectSingle(@PathVariable Long id, Model model) {
+        Optional<Article> optArticle = articleRepository.findById(id);
+        if (optArticle.isPresent()) {
+            model.addAttribute("article", optArticle.get());
+            return "articles/show";
+        } else return "error";
     }
 }
