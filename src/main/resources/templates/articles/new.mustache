@@ -1,7 +1,20 @@
 {{>layouts/header}}
-<form action="/articles" method="post">
-    <input type="text" name="contents"/>
-    <input type="text" name="title"/>
-    <input type="submit"/>
+<form class="container" action="/articles" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="title" name="title">
+        <div id="emailHelp" class="form-text">제목을 입력하세요.</div>
+    </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Contents</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="contents" name="contents">
+        <div id="emailHelp" class="form-text">내용을 입력하세요.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">작성자</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="author" name="author">
+        <div id="emailHelp" class="form-text">이름을 입력하세요.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">제출</button>
 </form>
 {{>layouts/footer}}
