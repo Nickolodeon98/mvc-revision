@@ -1,6 +1,23 @@
-<div>
-    이 페이지는 리스트 페이지입니다.
-    {{#articles}}
-        {{id}} {{title}} {{contents}} {{#author}}{{author}}{{/author}}
-    {{/articles}}
-</div>
+{{>layouts/header}}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Contents</th>
+            <th scope="col">Author</th>
+        </tr>
+        </thead>
+        {{#articles}}
+        <tbody>
+            <tr>
+            <th scope="row">{{id}}</th>
+                <td>{{title}}</td>
+                <td>{{contents}}</td>
+                {{#author}}<td>{{author}}</td>{{/author}}
+                {{^author}}<td>익명의 돌고래</td>{{/author}}
+            </tr>
+        </tbody>
+        {{/articles}}
+    </table>
+{{>layouts/footer}}
