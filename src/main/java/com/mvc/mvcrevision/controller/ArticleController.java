@@ -78,4 +78,9 @@ public class ArticleController {
         } else return "error";
     }
 
+    @GetMapping("/{id}/delete")
+    public String editList(@PathVariable Long id) {
+        articleRepository.deleteById(id);
+        return "redirect:/articles";
+    }
 }
