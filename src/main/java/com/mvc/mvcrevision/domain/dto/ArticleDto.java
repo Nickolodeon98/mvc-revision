@@ -15,6 +15,6 @@ public class ArticleDto {
     private String author;
 
     public Article toEntity() {
-        return new Article(this.title, this.contents, this.author);
+        return new Article(this.id, this.title, this.contents, this.author);
     }
 }
