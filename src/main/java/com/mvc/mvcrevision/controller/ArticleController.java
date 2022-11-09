@@ -28,6 +28,27 @@ public class ArticleController {
         return "redirect:/articles/list"; // 주소가 articles/list 라는 것
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Optional<Article> optArticle = articleRepository.findById(id);
+
+        if (optArticle.isPresent()) {
+            model.addAttribute("article", optArticle.get());
+            return "articles/edit";
+        } else {
+            model.addAttribute("message", String.format("%d가 없습니다.", id));
+            return "error";
+        }
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable Long id, ArticleDto articleDto, Model model) {
+        log.info("title:{} contents:{}", articleDto.getTitle(), articleDto.getContents());
+        Article updatedArticle = articleRepository.save(articleDto.toEntity());
+        model.addAttribute("article", updatedArticle);
+        return String.format("redirect:/articles/%d", updatedArticle.getId());
+    }
+
     @GetMapping("/list")
     public String list(Model model) {
         List<Article> articles = articleRepository.findAll();
